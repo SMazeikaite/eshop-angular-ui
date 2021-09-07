@@ -1,0 +1,25 @@
+<div class="container pt-4">
+    <h4 class="text-center"> {{ item?.title }} </h4>
+    <div class="row pt-4">
+        <div class="col-sm">
+            <img src="{{item?.imageUrl}}">
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                Price: {{ item?.price }}
+            </div>
+            <div class="row">
+                Category: {{ item?.category }}
+            </div>
+            <div class="row">
+                Size: {{ item?.size }}
+                <div class="row">
+                    {{ item?.description }}
+                </div>
+            </div>
+            <a href="#" class="btn btn-warning add-to-cart-btn"> <i class="fas fa-cart-plus"></i> Add to cart</a>
+        </div>
+    </div>
+
+
+</div>

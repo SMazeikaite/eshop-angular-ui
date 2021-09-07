@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StoreItemsComponent } from './store-items.component';
+import { StoreGridItemComponent } from './store-grid-item.component';
 
-describe('StoreItemsComponent', () => {
-  let component: StoreItemsComponent;
-  let fixture: ComponentFixture<StoreItemsComponent>;
+describe('StoreGridItemComponent', () => {
+  let component: StoreGridItemComponent;
+  let fixture: ComponentFixture<StoreGridItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StoreItemsComponent ]
+      declarations: [ StoreGridItemComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StoreItemsComponent);
+    fixture = TestBed.createComponent(StoreGridItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

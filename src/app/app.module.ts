@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { StoreItemsComponent } from './store-items/store-items.component';
-import { StoreItemComponent } from './store-items/store-item/store-item.component';
-
+import { StoreGridItemComponent } from './store-grid/store-grid-item/store-grid-item.component';
+import { StoreFilterComponent } from './store-grid/store-filter/store-filter.component';
+import { FilterPipe } from './store-grid/store-filter/store-filter.pipe';
+import { StoreService } from './store-grid/store.service';
 @NgModule({
   declarations: [
     AppComponent,
+    routingComponents,
     NavbarComponent,
-    StoreItemsComponent,
-    StoreItemComponent,
+    StoreGridItemComponent,
+    StoreFilterComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FilterPipe, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

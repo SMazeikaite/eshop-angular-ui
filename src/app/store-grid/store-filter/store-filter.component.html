@@ -1,0 +1,5 @@
+<div class="buttons align-items-center">
+    <span class="filters-title">Filters: </span>
+    <button class="btn" [ngClass]="expensiveFilterOn ? 'btn-dark' : 'btn-outline-dark'" (click)="onExpensiveFilterClick()">Expensive</button>
+    <button class="btn" [ngClass]="cheapFilterOn ? 'btn-dark' : 'btn-outline-dark'" (click)="onCheapFilterClick()">Cheap</button>
+</div>
