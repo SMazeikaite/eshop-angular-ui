@@ -20,18 +20,18 @@ export class CartService {
 
   addToCart(product: Product): void {
     this.items.push(product);
-    this.updateLocalStorage('cartItems', this.items);
+    this.updateCartInLocalStorage();
   }
 
   removeFromCart(index: number): void {
     if (index > -1) {
       this.items.splice(index, 1);
-      this.updateLocalStorage('cartItems', this.items);
+      this.updateCartInLocalStorage();
     }
   }
 
-  updateLocalStorage(name: string, data: Product[]): void {
-    localStorage.setItem(name, JSON.stringify(data));
+  updateCartInLocalStorage(): void {
+    localStorage.setItem('cartItems', JSON.stringify(this.items));
   }
 
   getItems(): Product[] {
@@ -40,5 +40,6 @@ export class CartService {
 
   clearCart(): void {
     this.items = [];
+    this.updateCartInLocalStorage();
   }
 }

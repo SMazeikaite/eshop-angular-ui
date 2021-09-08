@@ -1,9 +1,11 @@
 .cart-item {
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-columns: 15fr 5fr 1fr;
+    padding-left: 1em;
     padding-bottom: 1em;
-}
-
-.with-border {
-    border-bottom: 1px solid black;
+    height: 50px;
+    line-height: 50px;
+    background-color: #f1f1f1;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }

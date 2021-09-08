@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
   }
 
   showSuccess(): void {
-    this.toastr.success('Successfully added new item to the cart. Click to view.', 'Cart updated',  {
+    this.toastr.success('New item was added to the cart', 'Cart updated',  {
       timeOut: 3000,
       extendedTimeOut: 1000,
       onActivateTick: true,

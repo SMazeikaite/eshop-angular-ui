@@ -9,7 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent } from './product-list/product/product.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductsFilterComponent } from './product-list/products-filter/products-filter.component';
 import { FilterPipe } from './product-list/products-filter/products-filter.pipe';

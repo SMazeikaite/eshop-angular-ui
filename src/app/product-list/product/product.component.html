@@ -1,0 +1,22 @@
+<div class="container pt-4">
+    <h4 class="text-center"> {{ item?.title }} </h4>
+    <div class="row pt-4">
+        <div>
+            Rating: <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+        <div class="col-sm">
+            <img src="{{item?.imageUrl}}">
+        </div>
+        <div class="col-sm">
+            <span class="price">{{ item?.price | currency:'EUR'}}</span>
+            <div class="details">
+                <strong>Category:</strong> {{ item?.category }} <br>
+                <strong>Size:</strong> {{ item?.size }} <br>
+                <strong>Description:</strong> {{ item?.description }}<br>
+                <button class="btn btn-warning add-to-cart-btn mt-4" (click)="addToCart()"> <i class="fas fa-cart-plus"></i> Add to cart</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
