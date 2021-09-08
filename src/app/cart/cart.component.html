@@ -1,0 +1,18 @@
+<div class="container">
+    <h3 class="text-center mt-4">Products in the cart</h3>
+
+    <div class="cart-item" *ngFor="let item of items; let i = index">
+        <div class="with-border">
+            <span>{{ item.title }}</span> &nbsp;
+        </div>
+        <div class="with-border">
+            {{ item.price | currency:'EUR'}}
+        </div>
+        <div>
+            <button class="btn btn-danger" (click)="onRemoveItem(i)">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <button class="btn btn-danger" [disabled]="!items.length" (click)="onClearCart()">Clear cart</button>
+</div>
