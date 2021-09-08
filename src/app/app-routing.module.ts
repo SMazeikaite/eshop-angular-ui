@@ -6,7 +6,8 @@ import { ProductComponent } from './product/product.component';
 import { ProductResolverService } from './services/product-resolver.service';
 
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: ProductListComponent 
   },{ 
     path: 'product/:id',
