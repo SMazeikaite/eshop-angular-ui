@@ -1,26 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { StoreGridItemComponent } from './store-grid/store-grid-item/store-grid-item.component';
-import { StoreFilterComponent } from './store-grid/store-filter/store-filter.component';
-import { FilterPipe } from './store-grid/store-filter/store-filter.pipe';
-import { StoreService } from './store-grid/store.service';
-import { CartComponent } from './cart/cart.component';
-import { CartService } from './cart/cart.service';
+import { StoreService } from './services/store.service';
+import { CartService } from './services/cart.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductComponent } from './product/product.component';
+import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
+import { ProductsFilterComponent } from './product-list/products-filter/products-filter.component';
+import { FilterPipe } from './product-list/products-filter/products-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    NavbarComponent,
-    StoreGridItemComponent,
-    StoreFilterComponent,
-    FilterPipe,
+    ProductListComponent,
+    ProductComponent,
     CartComponent,
+    NavbarComponent,
+    ProductListItemComponent,
+    ProductsFilterComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ToastrModule.forRoot()
   ],
-  providers: [FilterPipe, StoreService, CartService ],
+  providers: [FilterPipe, StoreService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart/cart.service';
+import { Component } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(private cartService: CartService) { }
 
-  ngOnInit(): void {
-  }
-
-  get count(){
+  get count(): number {
     return this.cartService.items.length;
   }
 

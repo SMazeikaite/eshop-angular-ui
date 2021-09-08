@@ -1,25 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from 'src/app/data/product';
-import { StoreService } from '../store.service';
-import { FilterPipe } from './store-filter.pipe';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
+import { StoreService } from '../../services/store.service';
+import { FilterPipe } from './products-filter.pipe';
 
 @Component({
-  selector: 'app-store-filter',
-  templateUrl: './store-filter.component.html',
-  styleUrls: ['./store-filter.component.scss']
+  selector: 'app-products-filter',
+  templateUrl: './products-filter.component.html',
+  styleUrls: ['./products-filter.component.scss']
 })
-export class StoreFilterComponent implements OnInit {
+export class ProductsFilterComponent {
   @Input() lowerThan!: number;
   @Input() higherThan!: number;
   @Output() itemsFiltered = new EventEmitter<Product[]>();
-  expensiveFilterOn: boolean = false;
-  cheapFilterOn: boolean = false;
+  expensiveFilterOn = false;
+  cheapFilterOn = false;
   filteredItems!: Product[];
 
   constructor(private filterPipe: FilterPipe, private storeService: StoreService) { }
-
-  ngOnInit(): void {
-  }
 
   onExpensiveFilterClick(): void {
     this.expensiveFilterOn = !this.expensiveFilterOn;

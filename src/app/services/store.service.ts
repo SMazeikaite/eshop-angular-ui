@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../data/product';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-
-  constructor() { }
 
   getItem(id: number): Product {
     return this.getData()[id];
@@ -67,5 +65,5 @@ export class StoreService {
       "size": "?",
       "id": 5
     }
-  ]};
+  ]}
 }

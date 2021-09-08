@@ -1,9 +1,0 @@
-<div class="container">
-    <div class="row">
-        <app-store-filter [lowerThan]=1000 [higherThan]=1500 (itemsFiltered)="onItemsFiltered($event)"></app-store-filter>
-    </div>
-    <div class="row">
-        <app-store-grid-item *ngFor="let item of filteredStoreItems; let i = index" class="col-md-4 col-sm-6 col-12 text-center" [item]="item">
-        </app-store-grid-item>
-    </div>
-</div>

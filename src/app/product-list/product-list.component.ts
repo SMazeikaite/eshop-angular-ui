@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../data/product';
-import { StoreService } from './store.service';
+import { Product } from '../models/product.model';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-store-grid',
-  templateUrl: './store-grid.component.html',
-  styleUrls: ['./store-grid.component.scss']
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class StoreGridComponent implements OnInit {
+export class ProductListComponent implements OnInit {
 
   storeItems: Product[] = [];
   filteredStoreItems?: Product[];
