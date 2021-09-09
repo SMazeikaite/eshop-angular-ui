@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { StoreService } from './services/store.service';
-import { CartService } from './services/cart.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartComponent } from './cart/cart.component';
@@ -29,9 +27,9 @@ import { FilterPipe } from './product-list/products-filter/products-filter.pipe'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
-  providers: [FilterPipe, StoreService, CartService],
-  bootstrap: [AppComponent]
+  providers: [FilterPipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

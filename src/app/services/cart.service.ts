@@ -1,45 +1,61 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from '../models/product.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
+  items$ = new BehaviorSubject<Product[]>([]);
 
-  items: Product[] = [];
+  count$ = this.items$.pipe(map((items) => items.length));
+  // items: Product[] = [];
 
   constructor() {
     const cartJson = localStorage.getItem('cartItems');
     if (cartJson) {
+      const items: Product[] = [];
+
       const res = JSON.parse(cartJson);
       for (let i = 0; i < res.length; i++) {
-        this.items.push(res[i]);
+        items.push(res[i]);
       }
+
+      this.items$.next(items);
     }
   }
 
   addToCart(product: Product): void {
-    this.items.push(product);
+    const items = this.items$.getValue();
+    const newItems = [...items, product];
+
+    this.items$.next(newItems);
+
     this.updateCartInLocalStorage();
   }
 
   removeFromCart(index: number): void {
     if (index > -1) {
-      this.items.splice(index, 1);
+      const itemsCopy = [...this.items$.getValue()];
+
+      itemsCopy.splice(index, 1);
+      this.items$.next(itemsCopy);
+
       this.updateCartInLocalStorage();
     }
   }
 
   updateCartInLocalStorage(): void {
-    localStorage.setItem('cartItems', JSON.stringify(this.items));
+    localStorage.setItem('cartItems', JSON.stringify(this.items$.getValue()));
   }
 
   getItems(): Product[] {
-    return this.items;
+    return this.items$.getValue();
   }
 
   clearCart(): void {
-    this.items = [];
+    this.items$.next([]);
     this.updateCartInLocalStorage();
   }
 }
