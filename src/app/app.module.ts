@@ -10,7 +10,10 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductsFilterComponent } from './product-list/products-filter/products-filter.component';
-import { FilterPipe } from './product-list/products-filter/products-filter.pipe';
+import { FilterService } from './services/products-filter.service';
+import { ProductsToolbarComponent } from './product-list/products-toolbar/products-toolbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,15 +24,18 @@ import { FilterPipe } from './product-list/products-filter/products-filter.pipe'
     NavbarComponent,
     ProductListItemComponent,
     ProductsFilterComponent,
-    FilterPipe,
+    FilterService,
+    ProductsToolbarComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
+    NgbModule,
+    ReactiveFormsModule
   ],
-  providers: [FilterPipe],
+  providers: [FilterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

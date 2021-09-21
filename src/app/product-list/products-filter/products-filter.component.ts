@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { StoreService } from '../../services/store.service';
-import { FilterPipe } from './products-filter.pipe';
+import { FilterService } from '../../services/products-filter.service';
 
 @Component({
   selector: 'app-products-filter',
@@ -16,7 +16,7 @@ export class ProductsFilterComponent {
   cheapFilterOn = false;
   filteredItems!: Product[];
 
-  constructor(private filterPipe: FilterPipe, private storeService: StoreService) { }
+  constructor(private filterService: FilterService, private storeService: StoreService) { }
 
   onExpensiveFilterClick(): void {
     this.expensiveFilterOn = !this.expensiveFilterOn;
@@ -33,7 +33,7 @@ export class ProductsFilterComponent {
     if (this.expensiveFilterOn || this.cheapFilterOn) {
       const lowerThan = this.cheapFilterOn ? this.lowerThan : 0;
       const higherThan = this.expensiveFilterOn ? this.higherThan : Number.MAX_VALUE;
-      this.filteredItems = this.filterPipe.transform(this.storeService.getData(), lowerThan, higherThan);
+      this.filteredItems = this.filterService.transform(this.storeService.getData(), lowerThan, higherThan);
     }
     this.itemsFiltered.emit(this.filteredItems);
   }
