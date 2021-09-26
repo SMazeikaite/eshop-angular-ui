@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { StoreService } from '../../services/store.service';
 import { FilterService } from '../../services/products-filter.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-products-filter',
@@ -11,12 +12,15 @@ import { FilterService } from '../../services/products-filter.service';
 export class ProductsFilterComponent {
   @Input() lowerThan!: number;
   @Input() higherThan!: number;
-  @Output() itemsFiltered = new EventEmitter<Product[]>();
+  @Output() itemsFiltered = new EventEmitter<Observable<Product[]>>();
   expensiveFilterOn = false;
   cheapFilterOn = false;
   filteredItems!: Product[];
+  storeItems: Product[];
 
-  constructor(private filterService: FilterService, private storeService: StoreService) { }
+  constructor(private filterService: FilterService, private storeService: StoreService) {
+    this.storeService.getData().subscribe(data => this.storeItems = data);
+   }
 
   onExpensiveFilterClick(): void {
     this.expensiveFilterOn = !this.expensiveFilterOn;
@@ -29,13 +33,13 @@ export class ProductsFilterComponent {
   }
 
   filterStore(): void {
-    this.filteredItems = this.storeService.getData();
+    this.filteredItems = this.storeItems;
     if (this.expensiveFilterOn || this.cheapFilterOn) {
       const lowerThan = this.cheapFilterOn ? this.lowerThan : 0;
       const higherThan = this.expensiveFilterOn ? this.higherThan : Number.MAX_VALUE;
-      this.filteredItems = this.filterService.transform(this.storeService.getData(), lowerThan, higherThan);
+      this.filteredItems = this.filterService.transform(this.storeItems, lowerThan, higherThan);
     }
-    this.itemsFiltered.emit(this.filteredItems);
+    this.itemsFiltered.emit(of(this.filteredItems));
   }
 
 }

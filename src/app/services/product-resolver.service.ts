@@ -14,6 +14,6 @@ export class ProductResolverService implements Resolve<Product> {
   resolve(
     route: ActivatedRouteSnapshot
   ): Product | Observable<Product> | Promise<Product> {
-    return of(this.storeService.getItem(route.params.id)).pipe(delay(2000));
+    return this.storeService.getItem(route.params.id).pipe(delay(2000));
   }
 }

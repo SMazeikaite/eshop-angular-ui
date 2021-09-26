@@ -14,7 +14,8 @@ import { FilterService } from './services/products-filter.service';
 import { ProductsToolbarComponent } from './product-list/products-toolbar/products-toolbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddEditProductComponent } from './product-list/add-edit-product/add-edit-product.component';
+import { ModalComponent } from './modal/modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AddEditProductComponent } from './product-list/add-edit-product/add-edi
     ProductsFilterComponent,
     FilterService,
     ProductsToolbarComponent,
-    AddEditProductComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { AddEditProductComponent } from './product-list/add-edit-product/add-edi
     AppRoutingModule,
     ToastrModule.forRoot(),
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [FilterService],
   bootstrap: [AppComponent],

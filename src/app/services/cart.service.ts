@@ -8,9 +8,7 @@ import { Product } from '../models/product.model';
 })
 export class CartService {
   items$ = new BehaviorSubject<Product[]>([]);
-
   count$ = this.items$.pipe(map((items) => items.length));
-  // items: Product[] = [];
 
   constructor() {
     const cartJson = localStorage.getItem('cartItems');

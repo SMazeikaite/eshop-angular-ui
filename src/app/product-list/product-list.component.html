@@ -4,7 +4,7 @@
         <app-products-filter [lowerThan]=1000 [higherThan]=1500 (itemsFiltered)="onItemsFiltered($event)"></app-products-filter>
     </div>
     <div class="row">
-        <app-product-list-item *ngFor="let item of filteredStoreItems; let i = index" class="col-md-4 col-sm-6 col-12 text-center" [item]="item">
+        <app-product-list-item *ngFor="let item of (filteredStoreItems | async); let i = index" class="col-md-4 col-sm-6 col-12 text-center" [item]="item" (itemRemove)="onItemRemove(item)">
         </app-product-list-item>
     </div>
 </div>

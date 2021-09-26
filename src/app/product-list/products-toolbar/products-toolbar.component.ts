@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -10,15 +10,26 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class ProductsToolbarComponent {
 
-  productForm = new FormGroup({
-    'name': new FormControl({value: ''}, [
-      Validators.required
-    ]),
-    'description': new FormControl(),
-    'price': new FormControl(),
-  })
+  productFormGroup = this.fb.group(
+    {
+      title: [null, [Validators.required]],
+      price: [null, [Validators.required, Validators.min(1)]],
+      description: [null, []],
+    },
+    {
+      // validators: [lastNameAgeValidator],
+    }
+  );
 
-  constructor(private modalService: NgbModal, private storeService: StoreService) {}
+  constructor(private modalService: NgbModal, private storeService: StoreService, private fb: FormBuilder) {}
+
+  get lastName(): FormControl {
+    return this.productFormGroup.get('title') as FormControl;
+  }
+
+  get age(): FormControl {
+    return this.productFormGroup.get('price') as FormControl;
+  }
 
   open(content: TemplateRef<any>): void {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -27,8 +38,8 @@ export class ProductsToolbarComponent {
   }
 
   onSave(modal: NgbActiveModal): void {
-    console.log(this.productForm.value);
-    this.storeService.addItem(this.productForm.value);
+    console.log(this.productFormGroup.value);
+    this.storeService.addItem(this.productFormGroup.value);
     this.closeModal(modal);
   }
 

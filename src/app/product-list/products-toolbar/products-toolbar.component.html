@@ -6,19 +6,34 @@
       </button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="productForm">
-            <label for="name"> Name: </label>
-            <input type="text" formControlName="name" /><br>
-            <label for="price"> Price: </label>
-            <input type="number" formControlName="price" /><br>
-            <label for="description"> Description: </label>
-            <textarea rows="4" cols="50" formControlName="description"></textarea><br>
+        <form [formGroup]="productFormGroup" (ngSubmit)="onSave(modal)">
+            <div *ngIf="productFormGroup.controls.title.errors?.required &&
+            productFormGroup.controls.title.touched" class="alert alert-danger">
+                <strong>Title</strong> field is required
+            </div>
+            <div *ngIf="productFormGroup.controls.price.errors?.required &&
+            productFormGroup.controls.price.touched" class="alert alert-danger">
+                <strong>Price</strong> field is required
+            </div>
+            <div *ngIf="productFormGroup.controls.price.errors?.min &&
+            productFormGroup.controls.price.touched" class="alert alert-danger">
+                <strong>Price</strong> cannot be 0
+            </div>
+            <div class="cross-validation" [class.cross-validation-error]="productFormGroup.errors?.identityRevealed && (productFormGroup.touched || productFormGroup.dirty)">
+                <label for="title"> Title: </label>
+                <input type="text" formControlName="title" /><br>
+                <label for="price"> Price: </label>
+                <input type="number" formControlName="price" /><br>
+                <label for="description"> Description: </label>
+                <textarea rows="4" cols="50" formControlName="description"></textarea><br>
+            </div>
+            <div style="border-top: 1px solid gray; margin-top: 1em;">
+                <button type="submit" class="btn btn-outline-dark float-right" style="margin-top: 1em;" [disabled]="productFormGroup.invalid">Save</button>
+            </div>
         </form>
-        
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="onSave(modal)">Save</button>
-    </div>
+    <!-- <pre>productFormGroup.value: {{ productFormGroup.value | json }}</pre> -->
+
 </ng-template>
 
 <div class="buttons align-items-center">

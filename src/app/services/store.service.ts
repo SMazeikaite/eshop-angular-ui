@@ -1,23 +1,42 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
-import products from '../data/products.json';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
+  
+  items$ = new BehaviorSubject<Product[]>([]);
+  public productList:Product[] = [] as Product[];
+  url = 'http://localhost:3000/products';
 
-  public productList:Product[] = products;
+  constructor(private http: HttpClient) {
+    this.refreshItems();
+  }
 
-  getItem(id: number): Product {
-    return this.getData()[id];
+  getItem(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.url}/${id}`);
   }
 
   addItem(product: Product): void {
-    this.productList.push(product);
-  } 
+    this.http.post<Product>(this.url, product).subscribe(() => {
+      this.refreshItems();
+    });
+  }
 
-  getData(): Product[] {
-    return this.productList;
+  removeItem(product: Product): void {     
+    this.http.delete<Product>(`${this.url}/${product.id}`, ).subscribe(() => {
+      this.refreshItems();
+    });
+  }
+
+  refreshItems(): void {
+    this.getData().subscribe(data => this.items$.next(data));
+  }
+
+  getData(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url);
   }
 }

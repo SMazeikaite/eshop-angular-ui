@@ -2,14 +2,14 @@
     <img class="card-img-top" src="{{item.imageUrl}}" alt="Image of {{item.title}}">
     <h5 class="card-title">{{item.title}}
         <span class="price-tag">&#8364;{{item.price}}</span></h5>
-        <div class="right-side">
-            <button type="button" class="btn btn-outline-primary" routerLink="product/{{item.id}}">
+    <div class="right-side">
+        <button type="button" class="btn btn-outline-primary" routerLink="product/{{item.id}}">
                 <i class="fas fa-pencil-alt"></i> 
             </button>
-            <button type="button" class="btn btn-outline-danger" routerLink="product/{{item.id}}">
+        <button type="button" class="btn btn-outline-danger" (click)="openItemDeleteModal()">
                 <i class="fas fa-stroopwafel fa-trash"></i> 
-            </button>
-        </div>
+        </button>
+    </div>
     <div class="card-body">
         <h6>Category: {{item.category}}, size: {{item.size}}</h6>
         <div class="text-container">
@@ -21,3 +21,7 @@
         </div>
     </div>
 </div>
+
+<app-modal #itemDeleteModal [modalConfig]="modalConfig" (confirmedModal)="onItemDelete()">
+    You are about to delete item "<strong>{{item.title}}</strong>" from the shop. Are you sure you want to delete it?
+</app-modal>
