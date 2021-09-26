@@ -1,5 +1,5 @@
 .btn {
-    min-width: 100px;
+    min-width: 50px;
 }
 
 .price-tag {
@@ -12,8 +12,16 @@
 }
 
 .card-text {
-    background: #ececec;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.text-container {
     padding: 20px;
+    background: #ececec;
     border-radius: 20px;
 }
 
@@ -22,4 +30,16 @@
     padding: 5px;
     font-size: 20px;
     color: white;
+}
+
+.open-btn {
+    margin-top: 1rem;
+}
+
+.right-side {
+    text-align: end;
+
+    .btn {
+        margin: 5px;
+    }
 }

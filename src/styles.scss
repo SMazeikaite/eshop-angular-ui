@@ -2,9 +2,10 @@ body {
     overflow-y: scroll;
 }
 
-.btn:focus {
-    outline: none;
-    box-shadow: none;
-}
+// .btn:focus {
+//     outline: none;
+//     box-shadow: none;
+// }
 /* Importing Bootstrap SCSS file. */
+
 @import '~bootstrap/scss/bootstrap';

@@ -14,6 +14,7 @@ import { FilterService } from './services/products-filter.service';
 import { ProductsToolbarComponent } from './product-list/products-toolbar/products-toolbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddEditProductComponent } from './product-list/add-edit-product/add-edit-product.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductsFilterComponent,
     FilterService,
     ProductsToolbarComponent,
+    AddEditProductComponent,
   ],
   imports: [
     BrowserModule,

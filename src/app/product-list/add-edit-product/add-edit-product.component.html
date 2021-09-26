@@ -1,0 +1,10 @@
+<form [formGroup]="productForm">
+    <label for="name"> Name: </label>
+    <input type="text" formControlName="name" /><br>
+    <label for="price"> Price: </label>
+    <input type="number" formControlName="price" /><br>
+    <label for="description"> Description: </label>
+    <textarea rows="4" cols="50" formControlName="description"></textarea><br>
+</form>
+
+<button type="button" class="btn btn-outline-dark" (click)="onSaveClick()">Save</button>
