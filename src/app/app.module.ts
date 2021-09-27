@@ -15,7 +15,8 @@ import { ProductsToolbarComponent } from './product-list/products-toolbar/produc
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './modal/modal.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHttpInterceptor } from './error-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,14 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [FilterService],
+  providers: [FilterService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

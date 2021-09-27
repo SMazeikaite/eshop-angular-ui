@@ -19,6 +19,10 @@
             productFormGroup.controls.price.touched" class="alert alert-danger">
                 <strong>Price</strong> cannot be 0
             </div>
+            <div *ngIf="productFormGroup.controls.price.errors?.min &&
+            productFormGroup.controls.price.touched" class="alert alert-danger">
+                Name is taken
+            </div>
             <div class="cross-validation" [class.cross-validation-error]="productFormGroup.errors?.identityRevealed && (productFormGroup.touched || productFormGroup.dirty)">
                 <label for="title"> Title: </label>
                 <input type="text" formControlName="title" /><br>
