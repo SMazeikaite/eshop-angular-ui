@@ -10,11 +10,11 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./product-list-item.component.scss']
 })
 export class ProductListItemComponent implements OnInit{
-  @Input() item: Product = {} as Product;
+  @Input() item: Product;
   @Output() itemRemove = new EventEmitter<void>();
   descriptionLength = 120;
-  modalConfig: ModalConfig = {} as ModalConfig;
-  @ViewChild('itemDeleteModal') private modalComponent: ModalComponent = {} as ModalComponent;
+  modalConfig: ModalConfig;
+  @ViewChild('itemDeleteModal') private modalComponent: ModalComponent;
 
   constructor(private storeService: StoreService) { }
   

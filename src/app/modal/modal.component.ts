@@ -9,11 +9,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 })
 @Injectable()
 export class ModalComponent {
-  @Input() public modalConfig: ModalConfig = {} as ModalConfig;
+  @Input() public modalConfig: ModalConfig;
   @Output() confirmedModal = new EventEmitter<void>();
   @Output() closedModal = new EventEmitter<void>();
-  @ViewChild('modal') private modalContent: TemplateRef<ModalComponent> = {} as TemplateRef<ModalComponent>;
-  private modalRef: NgbModalRef = {} as NgbModalRef;
+  @ViewChild('modal') private modalContent?: TemplateRef<ModalComponent>;
+  private modalRef: NgbModalRef;
 
   constructor(private modalService: NgbModal) { }
   

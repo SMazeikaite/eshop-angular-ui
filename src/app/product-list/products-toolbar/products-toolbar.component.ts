@@ -13,7 +13,7 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class ProductsToolbarComponent {
 
-  products: Product[] = [] as Product[];
+  products: Product[];
   productFormGroup = this.fb.group(
     {
       title: [null, [Validators.required], [this.productNameValidator()]],
