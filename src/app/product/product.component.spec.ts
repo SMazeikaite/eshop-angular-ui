@@ -1,25 +1,38 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { DebugElement } from "@angular/core";
+// import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+// import { ActivatedRoute, convertToParamMap } from "@angular/router";
+// import { ToastrService } from "ngx-toastr";
+// import { of } from "rxjs";
+// import { ProductComponent } from "./product.component";
 
-import { StoreItemComponent } from './product.component';
+// describe('ProductComponent', () => {
+//     let component: ProductComponent;
+//     let fixture: ComponentFixture<ProductComponent>;
+//     let de: DebugElement;
 
-describe('StoreItemComponent', () => {
-  let component: StoreItemComponent;
-  let fixture: ComponentFixture<StoreItemComponent>;
+//     beforeEach(async(() => {
+//         const fakeActivatedRoute = {
+//             paramMap: of( convertToParamMap( { id: 1 } ) )
+//           };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ StoreItemComponent ]
-    })
-    .compileComponents();
-  });
+//         TestBed.configureTestingModule({
+//             declarations: [ProductComponent],
+//             providers: [{ provide: ActivatedRoute, useValue: fakeActivatedRoute },
+//             { provide: ToastrService, useValue: { } } ]
+//         })
+//         .compileComponents();
+//     }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StoreItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     beforeEach(() => {
+//         fixture = TestBed.createComponent(ProductComponent);
+//         component = fixture.componentInstance;
+//         de = fixture.debugElement;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//         fixture.detectChanges();
+//     })
+
+//     it('should create', () => {
+//         expect(component).toBeTruthy();
+//     });
+
+// });

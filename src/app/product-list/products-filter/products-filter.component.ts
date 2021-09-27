@@ -19,7 +19,7 @@ export class ProductsFilterComponent {
   storeItems: Product[];
 
   constructor(private filterService: FilterService, private storeService: StoreService) {
-    this.storeService.getData().subscribe(data => this.storeItems = data);
+    this.storeService.items$.subscribe(data => this.storeItems = data);
    }
 
   onExpensiveFilterClick(): void {

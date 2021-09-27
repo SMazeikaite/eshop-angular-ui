@@ -39,7 +39,6 @@ export class CartService {
 
       itemsCopy.splice(index, 1);
       this.items$.next(itemsCopy);
-
       this.updateCartInLocalStorage();
     }
   }

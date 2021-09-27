@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class StoreService {
   
   items$ = new BehaviorSubject<Product[]>([]);
-  public productList:Product[];
+  productList :Product[];
   url = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) {
@@ -26,8 +26,14 @@ export class StoreService {
     });
   }
 
+  updateItem(product: Product, id: number): void {
+    this.http.put<Product>(`${this.url}/${id}`, JSON.stringify(product), { headers: { 'Content-Type': 'application/json' } }).subscribe(() => {
+      this.refreshItems();
+    });
+  }
+
   removeItem(product: Product): void {     
-    this.http.delete<Product>(`${this.url}/${product.id}`, ).subscribe(() => {
+    this.http.delete<Product>(`${this.url}/${product.id}`).subscribe(() => {
       this.refreshItems();
     });
   }

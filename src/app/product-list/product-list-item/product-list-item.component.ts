@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { ModalConfig } from 'src/app/modal/modal.config';
 import { ModalComponent } from 'src/app/modal/modal.component';
 import { Product } from 'src/app/models/product.model';
-import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-product-list-item',
@@ -11,12 +10,12 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class ProductListItemComponent implements OnInit{
   @Input() item: Product;
-  @Output() itemRemove = new EventEmitter<void>();
+  @Output() removeItem = new EventEmitter<void>();
+  @Output() editItem = new EventEmitter<void>();
   descriptionLength = 120;
   modalConfig: ModalConfig;
   @ViewChild('itemDeleteModal') private modalComponent: ModalComponent;
-
-  constructor(private storeService: StoreService) { }
+  @ViewChild('itemEditModal') private editModalComponent: ModalComponent;
   
   ngOnInit(): void {
     this.modalConfig = {
@@ -31,7 +30,11 @@ export class ProductListItemComponent implements OnInit{
   }
 
   onItemDelete(): void {
-    this.itemRemove.emit();
+    this.removeItem.emit();
+  }
+
+  onItemEdit(): void {
+    this.editItem.emit();
   }
 
 }

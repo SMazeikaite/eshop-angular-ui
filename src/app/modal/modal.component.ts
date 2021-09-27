@@ -25,8 +25,8 @@ export class ModalComponent {
   }
 
   async confirm(): Promise<void> {
-    if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
-      const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss());
+    if (this.modalConfig.shouldSave === undefined || (await this.modalConfig.shouldSave())) {
+      const result = this.modalConfig.onSave === undefined || (await this.modalConfig.onSave());
       this.modalRef.dismiss(result);
       this.confirmedModal.emit();
     }
