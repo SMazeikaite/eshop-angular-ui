@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,46 +16,41 @@ import { StoreService } from '../services/store.service';
 @Component({
   selector: 'app-store-grid',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss'],  
+  styleUrls: ['./product-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
-  
   filteredStoreItems$?: Observable<Product[]>;
   products: Product[];
-  modalTitle: string;
   editingForm: boolean;
-  selectedProduct: Product = {} as Product;
+  selectedProduct: Partial<Product> = {};
   productFormGroup: FormGroup;
   expensiveFilterOn = false;
   cheapFilterOn = false;
   lowerThan: number | undefined;
   higherThan: number | undefined;
 
-  constructor(private modalService: NgbModal, private storeService: StoreService, private fb: FormBuilder) {
-    this.storeService.items$.subscribe(items => this.products = items);
+  constructor(
+    private modalService: NgbModal,
+    private storeService: StoreService,
+    private fb: FormBuilder
+  ) {
+    this.storeService.items$.subscribe((items) => (this.products = items));
     this.filteredStoreItems$ = this.storeService.items$;
 
-    this.productFormGroup = this.fb.group(
-      {
-        title: [this.selectedProduct.title, [Validators.required], [this.productNameValidator()]],
-        price: [this.selectedProduct.price, [Validators.required, Validators.min(1)]],
-        description: [this.selectedProduct.description, []],
-      },
-    );
+    this.productFormGroup = this.fb.group({
+      title: [null, [Validators.required], [this.productNameValidator()]],
+      price: [null, [Validators.required, Validators.min(1)]],
+      description: [null, []],
+    });
   }
 
   open(content: TemplateRef<any>, selectedProduct?: Product): void {
     this.editingForm = !!selectedProduct;
-    this.selectedProduct = selectedProduct ?? {} as Product;
+    this.selectedProduct = selectedProduct ?? {};
     this.modalService.open(content);
 
-    this.modalTitle = this.editingForm ? 'Edit item' : 'Add new item';
-    this.productFormGroup.setValue({
-      title: this.selectedProduct.title ?? null, 
-      price: this.selectedProduct.price ?? null, 
-      description: this.selectedProduct.description ?? null
-    });
+    this.productFormGroup.patchValue(this.selectedProduct);
   }
 
   closeModal(modal: NgbActiveModal): void {
@@ -67,6 +69,10 @@ export class ProductListComponent {
   }
 
   onEdit(modal: NgbActiveModal): void {
+    if (!this.selectedProduct.id) {
+      return;
+    }
+
     const product = this.productFormGroup.value;
     product.imageUrl = 'https://via.placeholder.com/1280x720';
     product.category = 'N/A';
@@ -75,7 +81,7 @@ export class ProductListComponent {
     this.closeModal(modal);
     this.resetFormValidations();
   }
-  
+
   onSave(modal: NgbActiveModal): void {
     const product = this.productFormGroup.value;
     product.imageUrl = 'https://via.placeholder.com/1280x720';
@@ -100,22 +106,23 @@ export class ProductListComponent {
     this.lowerThan = this.cheapFilterOn ? 1000 : undefined;
   }
 
-
   // Async validator
 
   productNameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-        return this.checkIfNameExists(control.value).pipe(
-          map(res => {
-            return res ? { nameExists: true } : null;
-          })
-        );
-      };
+      return this.checkIfNameExists(control.value).pipe(
+        map((res) => {
+          return res ? { nameExists: true } : null;
+        })
+      );
+    };
   }
 
   checkIfNameExists(title: string): Observable<boolean> {
-    const result = this.products.filter(d => d.title === title && title !== this.selectedProduct.title).length > 0;
+    const result =
+      this.products.filter(
+        (d) => d.title === title && title !== this.selectedProduct.title
+      ).length > 0;
     return of(result);
   }
-
 }
