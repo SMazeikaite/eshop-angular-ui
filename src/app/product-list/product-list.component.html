@@ -25,21 +25,20 @@
     </div>
     <div class="modal-body">
         <form [formGroup]="productFormGroup" (ngSubmit)="editingForm ? onEdit(modal) : onSave(modal)">
-            <div *ngIf="productFormGroup.controls.title.errors?.required &&
-            productFormGroup.controls.title.touched" class="alert alert-danger">
-                <strong>Title</strong> field is required
-            </div>
-            <div *ngIf="productFormGroup.controls.price.errors?.required &&
-            productFormGroup.controls.price.touched" class="alert alert-danger">
-                <strong>Price</strong> field is required
-            </div>
-            <div *ngIf="productFormGroup.controls.price.errors?.min &&
-            productFormGroup.controls.price.touched" class="alert alert-danger">
-                <strong>Price</strong> cannot be 0
-            </div>
-            <div *ngIf="productFormGroup.controls.title.errors?.nameExists &&
-            productFormGroup.controls.price.touched" class="alert alert-danger">
-                Name is taken
+            <div *ngIf="productFormGroup.invalid && productFormGroup.touched"
+            class="validation-message">
+                <div *ngIf="productFormGroup.controls.title.errors?.required" class="alert alert-danger">
+                    <strong>Title</strong> field is required
+                </div>
+                <div *ngIf="productFormGroup.controls.price.errors?.required" class="alert alert-danger">
+                    <strong>Price</strong> field is required
+                </div>
+                <div *ngIf="productFormGroup.controls.price.errors?.min" class="alert alert-danger">
+                    <strong>Price</strong> cannot be 0
+                </div>
+                <div *ngIf="productFormGroup.controls.title.errors?.nameExists" class="alert alert-danger">
+                    Name is taken
+                </div>
             </div>
             <div class="cross-validation" [class.cross-validation-error]="productFormGroup.touched || productFormGroup.dirty">
                 <label for="title"> Title: </label>

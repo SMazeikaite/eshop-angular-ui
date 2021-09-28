@@ -52,7 +52,14 @@ export class ProductListComponent {
   }
 
   closeModal(modal: NgbActiveModal): void {
+    this.resetFormValidations();
     modal.close();
+  }
+
+  resetFormValidations(): void {
+    this.productFormGroup.markAsPristine();
+    this.productFormGroup.markAsUntouched();
+    this.productFormGroup.updateValueAndValidity();
   }
 
   onItemRemove(product: Product): void {
@@ -66,6 +73,7 @@ export class ProductListComponent {
     product.size = 'N/A';
     this.storeService.updateItem(product, this.selectedProduct.id);
     this.closeModal(modal);
+    this.resetFormValidations();
   }
   
   onSave(modal: NgbActiveModal): void {
@@ -75,6 +83,7 @@ export class ProductListComponent {
     product.size = 'N/A';
     this.storeService.addItem(this.productFormGroup.value);
     this.closeModal(modal);
+    this.resetFormValidations();
   }
 
   onItemsFiltered(result: Observable<Product[]>): void {
