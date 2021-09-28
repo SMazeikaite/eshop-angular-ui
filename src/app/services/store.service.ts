@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class StoreService {
   
   items$ = new BehaviorSubject<Product[]>([]);
-  productList :Product[];
+  productList: Product[];
   url = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) {

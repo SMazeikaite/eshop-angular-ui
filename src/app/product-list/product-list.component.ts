@@ -14,16 +14,20 @@ import { StoreService } from '../services/store.service';
 })
 export class ProductListComponent {
   
-  filteredStoreItems?: Observable<Product[]>;
+  filteredStoreItems$?: Observable<Product[]>;
   products: Product[];
   modalTitle: string;
   editingForm: boolean;
   selectedProduct: Product = {} as Product;
   productFormGroup: FormGroup;
+  expensiveFilterOn = false;
+  cheapFilterOn = false;
+  lowerThan: number | undefined;
+  higherThan: number | undefined;
 
   constructor(private modalService: NgbModal, private storeService: StoreService, private fb: FormBuilder) {
     this.storeService.items$.subscribe(items => this.products = items);
-    this.filteredStoreItems = this.storeService.items$;
+    this.filteredStoreItems$ = this.storeService.items$;
 
     this.productFormGroup = this.fb.group(
       {
@@ -74,8 +78,19 @@ export class ProductListComponent {
   }
 
   onItemsFiltered(result: Observable<Product[]>): void {
-    this.filteredStoreItems = result;
+    this.filteredStoreItems$ = result;
   }
+
+  onExpensiveFilterClick(): void {
+    this.expensiveFilterOn = !this.expensiveFilterOn;
+    this.higherThan = this.expensiveFilterOn ? 1500 : undefined;
+  }
+
+  onCheapFilterClick(): void {
+    this.cheapFilterOn = !this.cheapFilterOn;
+    this.lowerThan = this.cheapFilterOn ? 1000 : undefined;
+  }
+
 
   // Async validator
 

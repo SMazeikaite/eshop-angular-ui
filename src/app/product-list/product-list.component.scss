@@ -2,8 +2,13 @@ app-product-list-item {
     padding: 5px;
 }
 
-app-products-filter {
-    float: right;
+.filter {
+    text-align: end;
+
+    button {
+        padding: 10px;
+        margin: 10px;
+    }
 }
 
 label {

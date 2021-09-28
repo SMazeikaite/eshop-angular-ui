@@ -1,6 +1,6 @@
 import { Product } from "../models/product.model";
 import { CartService } from "./cart.service";
-import { FilterService } from "./products-filter.service";
+import { FilterPipe } from "./products-filter.pipe";
 
 
 describe('Services: ', () => {
@@ -45,12 +45,12 @@ describe('Services: ', () => {
         });
     });
 
-    describe('products filter service ', () => {
-        let service: FilterService;
+    describe('products filter service should filter items correctly', () => {
+        let service: FilterPipe;
         let product: Product;
     
         beforeEach((() => {
-            service = new FilterService();
+            service = new FilterPipe();
             product = {
                 title: "Test title",
                 price: 1010,
@@ -62,27 +62,33 @@ describe('Services: ', () => {
             };        
         }));
 
-        it('should filter items correctly. Cheap filter.', () => {
+        it('item is cheap', () => {
             const product1 = product;
             const product2 = Object.assign({}, product);
             product2.price = 100;
             product2.id = 4;
-            const result = service.transform([product1, product2], 150, 1100);
-            console.log(result);
+            const result = service.transform([product1, product2], 150, undefined);
             expect(result.length == 1 && result[0].id === 4).toBeTruthy();
         });
 
-        it('should filter items correctly. Expensive filter.', () => {
+        it('item is expensive', () => {
             const product1 = product;
             const product2 = Object.assign({}, product);
             product2.price = 2000;
-            const result = service.transform([product1, product2], 150, 1000);
+            const result = service.transform([product1, product2], undefined, 1000);
             expect(result.length == 2).toBeTruthy();
         });
 
-        it('should filter items correctly. Item is between expensive and cheap.', () => {
+        it('item is not expensive and not cheap.', () => {
             const result = service.transform([product], 10, 1500);
             expect(result.length).toBe(0);
+        });
+
+        it('all items are either expensive or cheap', () => {
+            const product2 = Object.assign({}, product);
+            product.price = 50;
+            const result = service.transform([product, product2], 100, 1000);
+            expect(result.length).toBe(2);
         });
 
     });
